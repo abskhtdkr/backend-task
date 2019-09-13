@@ -6,9 +6,10 @@ module.exports = (options) => {
       if (req.query.select != undefined && req.query.select != "undefined") {
         select = JSON.parse(req.query.select) || undefined;
       }
-  
       if (req.query.filter != undefined && req.query.filter != "undefined") {
         filter = JSON.parse(req.query.filter) || undefined;
+      } else if(req.query != undefined && req.query != "undefined") {
+        filter = req.query || undefined;
       }
       
       if (req.query.sort != undefined && req.query.sort != "undefined") {
