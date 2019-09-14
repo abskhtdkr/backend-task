@@ -43,6 +43,7 @@ module.exports.fetchCities = (daoObj) => {
                         result.push(obj);
                         obj = { name: "", latitude: "", longitude: "", score: "" };
                     })
+                    result.sort((a, b) => parseFloat(b.score) - parseFloat(a.score));
                     resolve({ result: result });
                 }
             }).catch(err => {
