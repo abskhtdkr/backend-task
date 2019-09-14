@@ -5,7 +5,6 @@ module.exports.fetchCities = (req, res) => {
         if (data.result) {
             res.status(200).json({ suggestions: data.result});
         } else {
-            console.log(data);
             res.status(200).json({ "suggestions": [] })
         }
     }).catch(err => {
