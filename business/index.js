@@ -8,7 +8,7 @@ module.exports.fetchCities = (daoObj) => {
                 if (data.result) {
                     let score = 0, result = [], obj = { name: "", latitude: "", longitude: "", score: "" };
                     data.result.map(res => {
-                        if (res.latitude) {
+                        if (res.latitude && daoObj.filter.latitude) {
                             if (res.latitude < 0 && daoObj.filter.latitude < 0) {
                                 if (res.latitude > daoObj.filter.latitude)
                                     score = (res.latitude / daoObj.filter.latitude)
@@ -21,7 +21,7 @@ module.exports.fetchCities = (daoObj) => {
                                     score = (res.latitude / daoObj.filter.latitude)
                             }
                         }
-                        if (res.longitude) {
+                        if (res.longitude && daoObj.filter.longitude) {
                             if (res.longitude < 0 && daoObj.filter.longitude < 0) {
                                 if (res.longitude > daoObj.filter.longitude)
                                     score += (res.longitude / daoObj.filter.longitude)
