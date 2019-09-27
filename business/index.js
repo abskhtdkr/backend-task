@@ -8,37 +8,37 @@ module.exports.fetchCities = (daoObj) => {
                 if (data.result) {
                     let score = 0, result = [], obj = { name: "", latitude: "", longitude: "", score: "" };
                     data.result.map(res => {
-                        if (res.latitude && daoObj.filter.latitude) {
-                            if (res.latitude < 0 && daoObj.filter.latitude < 0) {
-                                if (res.latitude > daoObj.filter.latitude)
-                                    score = (res.latitude / daoObj.filter.latitude)
+                        if (res.lat && daoObj.filter.latitude) {
+                            if (res.lat < 0 && daoObj.filter.latitude < 0) {
+                                if (res.lat > daoObj.filter.latitude)
+                                    score = (res.lat / daoObj.filter.latitude)
                                 else
-                                    score = (daoObj.filter.latitude / res.latitude)
+                                    score = (daoObj.filter.latitude / res.lat)
                             } else {
-                                if (res.latitude > daoObj.filter.latitude)
-                                    score = (daoObj.filter.latitude / res.latitude)
+                                if (res.lat > daoObj.filter.latitude)
+                                    score = (daoObj.filter.latitude / res.lat)
                                 else
-                                    score = (res.latitude / daoObj.filter.latitude)
+                                    score = (res.lat / daoObj.filter.latitude)
                             }
                         }
-                        if (res.longitude && daoObj.filter.longitude) {
-                            if (res.longitude < 0 && daoObj.filter.longitude < 0) {
-                                if (res.longitude > daoObj.filter.longitude)
-                                    score += (res.longitude / daoObj.filter.longitude)
+                        if (res.long && daoObj.filter.longitude) {
+                            if (res.long < 0 && daoObj.filter.longitude < 0) {
+                                if (res.long > daoObj.filter.longitude)
+                                    score += (res.long / daoObj.filter.longitude)
                                 else
-                                    score += (daoObj.filter.longitude / res.longitude)
+                                    score += (daoObj.filter.longitude / res.long)
                             } else {
-                                if (res.longitude > daoObj.filter.longitude)
-                                    score += (daoObj.filter.longitude / res.longitude)
+                                if (res.long > daoObj.filter.longitude)
+                                    score += (daoObj.filter.longitude / res.long)
                                 else
-                                    score += (res.longitude / daoObj.filter.longitude)
+                                    score += (res.long / daoObj.filter.longitude)
                             }
                         }
                         score = score / 2;
                         score = toFixed(score, 1);
                         obj.name = res.name;
-                        obj.latitude = res.latitude;
-                        obj.longitude = res.longitude;
+                        obj.latitude = res.lat;
+                        obj.longitude = res.long;
                         obj.score = score;
                         result.push(obj);
                         obj = { name: "", latitude: "", longitude: "", score: "" };
@@ -49,6 +49,8 @@ module.exports.fetchCities = (daoObj) => {
             }).catch(err => {
                 reject({ error: "Error while performing query!", dev_err: err });
             });
+        } else {
+            reject({ error: "Please send query parameter!"});
         }
     });
 }
